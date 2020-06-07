@@ -7,6 +7,9 @@ const morgan = require('morgan');
 
 const app = express();
 
+require("./config/db")(app);
+
+
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json())
