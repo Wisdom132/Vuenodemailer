@@ -15,7 +15,6 @@ let transporter = nodemailer.createTransport({
 });
 
 
-
 const handlebarOptions = {
     viewEngine: {
         extName: '.handlebars',
@@ -28,3 +27,15 @@ const handlebarOptions = {
 };
 
 transporter.use('compile', hbs(handlebarOptions));
+
+
+
+exports.welcomeMail = user => transporter.sendMail({
+    from: 'Vue Mailer',
+    to: user,
+    subject: "Account Creation",
+    template: "welcome",
+    context: {
+        user: user
+    }
+});
