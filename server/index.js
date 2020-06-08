@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const app = express();
 
 require("./config/db")(app);
+require("./api/routeHandler")(app)
 
 
 app.use(morgan('dev'));

@@ -3,6 +3,7 @@ let mailer = require("../../config/mailer");
 
 exports.registerNewUser = async (req, res) => {
     try {
+
         let user = new User({
             name: req.body.name,
             email: req.body.email,
@@ -12,7 +13,7 @@ exports.registerNewUser = async (req, res) => {
         let addedUser = await user.save();
 
         if (addedUser) {
-            mailer.welcomeMail(req.body.name)
+            mailer.welcomeMail(req.body.email)
         }
 
 
