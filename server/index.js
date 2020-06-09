@@ -3,12 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
-
 const app = express();
 
-require("./config/db")(app);
-require("./api/routeHandler")(app)
+
 
 
 app.use(morgan('dev'));
@@ -18,6 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+
+require("./config/db")(app);
+require('./api/routerHandler')(app)
 
 app.get('/', (req, res) => {
     res.json({

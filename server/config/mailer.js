@@ -30,12 +30,12 @@ transporter.use('compile', hbs(handlebarOptions));
 
 
 
-exports.welcomeMail = user => transporter.sendMail({
+exports.welcomeMail = (email, name) => transporter.sendMail({
     from: 'Vue Mailer',
-    to: user,
+    to: email,
     subject: "Account Creation",
     template: "welcome",
     context: {
-        user: user
+        user: name
     }
 });

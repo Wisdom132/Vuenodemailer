@@ -3,8 +3,7 @@ let mailer = require("../../config/mailer");
 
 exports.registerNewUser = async (req, res) => {
     try {
-        console.log(req.body)
-        let user = new User({
+        const user = new User({
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone
@@ -12,13 +11,30 @@ exports.registerNewUser = async (req, res) => {
         let addedUser = await user.save();
 
         if (addedUser) {
-            mailer.welcomeMail(req.body.email)
+            mailer.welcomeMail(req.body.email, req.body.name)
         }
 
 
         res.status(200).json({
             msg: "Welcome Onboard",
             data: addedUser
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        let users = await User.find();
+        res.status(200).json({
+            msg: "Welcome Onboard",
+            data: users
         })
 
     } catch (err) {
